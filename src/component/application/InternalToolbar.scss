@@ -1,0 +1,50 @@
+@import "src/App";
+
+.InternalToolbar {
+  width: 100%;
+  padding: $sizePaddingRegular;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  .internal-toolbar-inner {
+    flex: 1;
+    padding: $sizePaddingSmall;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: $colorDark05;
+    border-radius: $sizeBorderRadiusSmall;
+  }
+}
+
+.InternalToolbarTitle {
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny $sizePaddingSmall;
+}
+
+.InternalToolbarText {
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontSmall;
+  margin-left: $sizePaddingSmall;
+}
+
+.InternalToolbarButton {
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny $sizePaddingSmall;
+  background-color: $colorDark08;
+  border-radius: $sizeBorderRadiusSmall;
+  cursor: pointer;
+}
+
+.InternalToolbarSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

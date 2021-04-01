@@ -1,0 +1,105 @@
+@import 'src/App';
+
+.BaseModal {
+  padding-top: 64px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .modal-container {
+    background-color: $colorDark11;
+    border-radius: $sizeBorderRadiusSmall;
+    min-width: 600px;
+    min-height: 400px;
+    max-height: 90%;
+    max-width: 90%;
+    outline: 0;
+    padding: $sizePaddingRegular;
+    padding-top: $sizePaddingTiny;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .modal-top-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      .modal-close-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        .modal-title-text {
+          @extend .roboto-300;
+          flex: 1;
+          font-size: $sizeFontSmall;
+          color: $colorLight11;
+        }
+      }
+
+    }
+
+    .modal-content-container {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-y: scroll;
+    }
+
+    .modal-button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      padding-top: $sizePaddingSmall;
+      padding-right: $sizePaddingSmall;
+      padding-left: $sizePaddingSmall;
+      width: 100%;
+
+      .modal-button-more {
+        transition-duration: $durationTransitionNormal;
+        padding: $sizePaddingSmall;
+        @extend .roboto-300;
+        font-size: $sizeFontRegular;
+        color: $colorMiddle07;
+        border-radius: $sizeBorderRadiusSmall;
+        margin-left: $sizePaddingRegular;
+        cursor: pointer;
+      }
+
+      .modal-button-more:hover {
+        background-color: $colorDark07;
+      }
+
+      .modal-button-done {
+        transition-duration: $durationTransitionNormal;
+        padding: $sizePaddingSmall;
+        @extend .roboto-300;
+        font-size: $sizeFontRegular;
+        color: $colorLight11;
+        background-color: $colorAccent11;
+        border-radius: $sizeBorderRadiusSmall;
+        margin-left: $sizePaddingRegular;
+        cursor: pointer;
+      }
+
+      .modal-button-done:hover {
+        background-color: $colorAccent07;
+      }
+    }
+  }
+}
+
+.MuiIconButton-root {
+  padding: $sizePaddingSmall;
+}

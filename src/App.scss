@@ -1,0 +1,129 @@
+$colorDark01: #000000;
+$colorDark02: #101010;
+$colorDark03: #202020;
+$colorDark04: #242424;
+$colorDark05: #282828;
+$colorDark06: #303030;
+$colorDark07: #323232;
+$colorDark08: #383838;
+$colorDark09: #424242;
+$colorDark11: #484848;
+
+$colorMiddle07: #999999;
+
+$colorLight03: #cccccc;
+$colorLight07: #dddddd;
+$colorLight11: #eeeeee;
+
+$colorAccent07: #303e4b;
+$colorAccent07Diffused08: #303e4b11;
+
+$colorAccent11: #1a222a;
+
+$colorError: #7e0e12;
+$colorWarn: #7b7a08;
+
+$sizePaddingTiny: 4px;
+$sizePaddingSmall: 8px;
+$sizePaddingRegular: 12px;
+$sizePaddingBig: 16px;
+
+$sizeFontSmall: 12px;
+$sizeFontRegular: 16px;
+$sizeFontBig: 20px;
+
+$sizeBorderRadiusSmall: 2px;
+$sizeBorderRadiusRegular: 4px;
+$sizeBorderRadiusBig: 6px;
+
+$durationTransitionNormal: 0.2s;
+
+$drawerWidth: 240px;
+
+.App {
+  @extend .roboto-300;
+  width: 100%;
+  height: 100%;
+  background-color: $colorDark03;
+}
+.AppNameText {
+  @extend .roboto-300;
+  color: $colorLight11;
+  font-size: $sizeFontBig;
+  padding-bottom: $sizePaddingSmall;
+}
+.AppVersionText {
+  @extend .roboto-300;
+  color: $colorLight11;
+  font-size: $sizeFontRegular;
+}
+
+.raleway {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  font-variant: small-caps;
+  line-height: 1.2;
+}
+
+.raleway-fat {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  font-variant: small-caps;
+  line-height: 1.2;
+}
+
+.raleway-spaced {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.6em;
+  font-variant: small-caps;
+  line-height: 1.2;
+}
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  font-variant: normal;
+  line-height: 1.2;
+}
+
+.montserrat-thick {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  font-variant: normal;
+  line-height: 1.2;
+}
+
+.roboto-100 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-variant: normal;
+  line-height: 1.2;
+}
+
+.roboto-300 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  font-variant: normal;
+  line-height: 1.2;
+}
+
+.roboto-500 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  font-variant: normal;
+  line-height: 1.2;
+}
+
+.roboto-500-default {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-variant: normal;
+}

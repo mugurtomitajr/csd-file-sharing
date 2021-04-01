@@ -1,0 +1,50 @@
+@import "src/App";
+
+.Drawer {
+  height: 100%;
+  width: $drawerWidth;
+
+  background-color: $colorDark05;
+
+  border: solid 0 $colorDark02;
+  border-right-width: 2px;
+
+  .logo-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $sizePaddingBig;
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: $sizePaddingBig;
+    }
+    .app-name {
+      @extend .roboto-300;
+      text-align: center;
+      color: $colorLight11;
+      font-size: $sizeFontSmall;
+      padding-bottom: $sizePaddingTiny;
+    }
+    .app-version {
+      @extend .roboto-300;
+      text-align: center;
+      color: $colorLight11;
+      font-size: $sizeFontSmall;
+    }
+  }
+
+}
+
+.DrawerItem {
+  @extend .roboto-300;
+  color: $colorLight11;
+  font-size: $sizeFontSmall;
+  padding: $sizePaddingSmall;
+
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+}

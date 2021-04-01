@@ -1,0 +1,17 @@
+@import "src/App";
+
+.EasyButton {
+  transition-duration: $durationTransitionNormal;
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny $sizePaddingSmall;
+  background-color: $colorDark08;
+  border-radius: $sizeBorderRadiusSmall;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.EasyButton:hover {
+  background-color: $colorDark06;
+}

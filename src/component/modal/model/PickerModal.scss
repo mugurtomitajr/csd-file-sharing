@@ -1,0 +1,83 @@
+@import 'src/App';
+
+.PickerModal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+
+  .picker-modal-list-container {
+    flex: 1;
+    width: 100%;
+    margin-top: $sizePaddingSmall;
+    height: 100%;
+  }
+}
+
+.picker-modal-search-container {
+  width: 100%;
+  .picker-modal-search-input {
+    @extend .roboto-300;
+    width: 100%;
+    font-size: $sizeFontSmall;
+    color: #333333;
+    border-width: 0;
+    outline: 0;
+    border-bottom-width: 1px;
+    border-color: $colorDark11;
+    padding: $sizePaddingSmall;
+    transition-duration: $durationTransitionNormal;
+  }
+  .picker-modal-search-input:focus {
+    border-color: $colorAccent07;
+  }
+}
+
+.PickerModalItemEntry {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $sizePaddingSmall $sizePaddingRegular;
+  cursor: pointer;
+  background-color: $colorLight03;
+  margin-bottom: $sizePaddingSmall;
+  border-radius: $sizeBorderRadiusSmall;
+
+  .modal-checkbox-outline {
+    padding: 2px;
+    background-color: $colorAccent07;
+    margin-right: $sizePaddingRegular;
+    border-radius: 100px;
+
+    .modal-checkbox-inside {
+      flex: 1;
+      background-color: $colorAccent07;
+      height:$sizePaddingRegular;
+      width: $sizePaddingRegular;
+      transition-duration: $durationTransitionNormal;
+      border-radius: 100px;
+    }
+
+  }
+
+  .modal-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .modal-item-content-title {
+      @extend .roboto-300;
+      font-size: $sizeFontSmall;
+      color: $colorDark07;
+    }
+
+    .modal-item-content-description {
+      @extend .roboto-300;
+      font-size: $sizeFontSmall;
+      color: $colorDark07;
+      padding-top: $sizePaddingSmall;
+    }
+  }
+}

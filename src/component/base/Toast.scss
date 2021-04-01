@@ -1,0 +1,24 @@
+@import '../../App';
+
+.Toast {
+  .snack-normal {
+    color: #fff;
+    @extend .roboto-300;
+    font-size: 14px;
+    background-color: $colorAccent07;
+  }
+
+  .snack-error {
+    color: #fff;
+    @extend .roboto-300;
+    font-size: 14px;
+    background-color: $colorError;
+  }
+
+  .snack-warn {
+    color: #fff;
+    @extend .roboto-300;
+    font-size: 14px;
+    background-color: $colorWarn;
+  }
+}
