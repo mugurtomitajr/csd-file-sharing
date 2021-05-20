@@ -38,6 +38,9 @@ class DashboardPage extends React.Component {
         destination: '',
         message: '',
         
+        destinationFile: '',
+        filename: '',
+        
         logs: [],
         logText: '',
     };
@@ -109,6 +112,17 @@ class DashboardPage extends React.Component {
                         this.setState({
                             logs: logs,
                         });
+                    }, (sender, filename) => {
+                        this.props.toast("Ai primit un nou fisier de la " + sender + ".");
+                        let logs = this.state.logs;
+                        logs.push({
+                            sender: sender,
+                            destination: this.state.username,
+                            message: 'Fisier primit ' + filename,
+                        });
+                        this.setState({
+                            logs: logs,
+                        });
                     });
                     if(connection.successful) {
                         this.props.toast("Conectare efectuata cu succes!", kToastActionWarn);
@@ -137,6 +151,8 @@ class DashboardPage extends React.Component {
                 {this.consoleUI()}
                 
                 {this.sendMessageUI()}
+                
+                {this.sendFileUI()}
     
                 <EasyField style={{marginTop: 24}} text={"Daca vrei sa te reconectezi cu alt nume sau vrei sa te deconectezi, apasa butonul de mai jos."}/>
                 
@@ -196,6 +212,62 @@ class DashboardPage extends React.Component {
                     this.setState({
                         message: '',
                         logs: logs,
+                    });
+                }}/>
+            </>
+        )
+    }
+    
+    sendFileUI = () => {
+        return (
+            <>
+                <EasyField style={{marginTop:24}} text={"Trimite un fisier"}/>
+                
+                <EasyField
+                    editable
+                    text={this.state.destinationFile}
+                    onChange={(newValue) => {this.setState({destinationFile: newValue})}}
+                    placeholder={'destinatarul'}
+                    style={{marginTop: 4, marginBottom: 4, minWidth: 400}}/>
+                
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                    <EasyField
+                        text={this.state.filename}
+                        onChange={(newValue) => {this.setState({filename: newValue})}}
+                        placeholder={'fisierul'}
+                        style={{marginTop: 4, marginBottom: 8}}/>
+                        
+                    <EasyButton text={'Alege fisierul'} style={{marginBottom: 4, marginLeft: 8}} onPress={async () => {
+                        let selectionResult = await electron.remote.dialog.showOpenDialog({ properties: ['openFile']});
+                        if(!selectionResult.canceled) {
+                            let filepath = selectionResult.filePaths[0];
+                            this.setState({
+                                filename: filepath,
+                            });
+                            this.props.toast("Fisierul a fost selectat cu succes.");
+                        } else {
+                            this.props.toast("Selectia a fost abandonata!", kToastActionError);
+                        }
+                    }}/>
+                </div>
+                
+                <EasyButton text={'Trimite fisierul'} onPress={() => {
+                    this.state.connection.sendFile(this.state.destinationFile, this.state.filename, (successful) => {
+                        if(!successful) {
+                            this.props.toast("Fisierul nu a fost trimis!", kToastActionError);
+                            return;
+                        }
+                        this.props.toast("Fisierul a fost trimis cu succes!");
+                        let logs = this.state.logs;
+                        logs.push({
+                            sender: this.state.username,
+                            destination: this.state.destinationFile,
+                            message: "Ai trimis un fisier...",
+                        });
+                        this.setState({
+                            filename: '',
+                            logs: logs,
+                        });
                     });
                 }}/>
             </>

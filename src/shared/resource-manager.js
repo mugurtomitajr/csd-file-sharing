@@ -23,10 +23,19 @@ function readFileFromDisk(filePath) {
     return contents;
 }
 
+function readFileFromDiskRaw(filePath) {
+    let contents = fs.readFileSync(filePath);
+    return contents;
+}
+
+function writeFileToResources(filename, data, options) {
+    fs.writeFileSync(pathToResources + filename, data, options);
+}
+
+
 module.exports = {
     pathToResources,
-    getResourceIndexList,
-    getResourceIndex,
-    putResourceIndex,
     readFileFromDisk,
+    readFileFromDiskRaw,
+    writeFileToResources,
 };

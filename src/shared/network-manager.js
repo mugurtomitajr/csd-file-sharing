@@ -1,5 +1,6 @@
-import {writeFileSync} from "fs";
 import { ModeOfOperation, DataEncrypter, RC6EncryptionAlgorithm } from "vas-crypto-lib";
+import {readFileFromDiskRaw, writeFileToResources} from './resource-manager';
+import {v4 as uuidV4} from 'uuid';
 
 const {isProduction} = require('./constants');
 
@@ -38,8 +39,9 @@ const rc6GetCommonKeyForUsers = (user1, user2) => {
     return key;
 };
 
-export const connectToServer = (username, onMessageReceived) => {
+export const connectToServer = (username, onMessageReceived, onFileReceived) => {
     const ws = new WebSocket("ws://localhost:16969");
+    let fileReceiveBuffer = [];
     
     ws.addEventListener("open", function open() {
         ws.send(JSON.stringify({type: "login", name: username}));
@@ -64,6 +66,28 @@ export const connectToServer = (username, onMessageReceived) => {
             let decoded = new TextDecoder().decode(decrypted.slice(0, messageLength));
             
             onMessageReceived(sender, decoded);
+        } else if(jsonData.type === "file_part"){
+            let message = jsonData.message;
+            fileReceiveBuffer.push(...message);
+        } else if(jsonData.type === "file_end"){
+            let fileLength = jsonData.length;
+            let sender = jsonData.source;
+    
+            let enc = new DataEncrypter();
+            enc.setModeOfOperation(ModeOfOperation.CBC);
+            enc.setEncryptionAlgorithm(new RC6EncryptionAlgorithm());
+            enc.setInitializationVector(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]));
+    
+            let key = rc6GetCommonKeyForUsers(username, sender);
+    
+            let encryptedFileBytes = new Uint8Array(fileReceiveBuffer);
+            let fileBytes = enc.decryptBlob(encryptedFileBytes, key).slice(0, fileLength);
+            fileReceiveBuffer = [];
+    
+            let name = uuidV4();
+            writeFileToResources(name, Buffer.from(fileBytes), { flag: 'w+' });
+            console.log("Received " + name + ".txt from " + sender);
+            onFileReceived(sender, name);
         }
     });
     
@@ -87,8 +111,40 @@ export const connectToServer = (username, onMessageReceived) => {
         ws.send(JSON.stringify(messageToSend));
     };
     
-    const sendFile = () => {
+    const sendFile = async (destination, filepath, callback) => {
+        let fileBytes = readFileFromDiskRaw(filepath);
+        
+        let enc = new DataEncrypter();
+        enc.setModeOfOperation(ModeOfOperation.CBC);
+        enc.setEncryptionAlgorithm(new RC6EncryptionAlgorithm());
+        enc.setInitializationVector(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]));
     
+        let key = rc6GetCommonKeyForUsers(username, destination);
+    
+        let encrypted = enc.encryptBlob(fileBytes, key);
+    
+        let chunkSize = 20; // Can be anything
+    
+        for(let i = 0; i < fileBytes.length; i += chunkSize){
+            let chunk = encrypted.slice(i, i + chunkSize);
+        
+            let filePartMessage = {
+                type: "file_part",
+                source: username,
+                destination: destination,
+                message: Array.from(chunk)
+            };
+            ws.send(JSON.stringify(filePartMessage));
+        }
+    
+        let fileEndMessage = {
+            type: "file_end",
+            source: username,
+            destination: destination,
+            length: fileBytes.length
+        };
+        ws.send(JSON.stringify(fileEndMessage));
+        callback(true);
     };
     
     return {
