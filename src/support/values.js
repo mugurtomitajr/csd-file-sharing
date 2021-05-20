@@ -1,6 +1,6 @@
 export const kPageDashboard = {
     id: 'dashboard',
-    name: 'Dashboard'
+    name: 'CSD File Sharing'
 };
 
 export const kPageSettings = {
@@ -15,7 +15,7 @@ export const kPages = [
 
 export const kDrawerPages = [
     kPageDashboard,
-    kPageSettings,
+    //kPageSettings,
 ];
 
 export const kResponsePositive = 'response-ok';

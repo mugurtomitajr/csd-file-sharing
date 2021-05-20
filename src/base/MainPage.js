@@ -19,7 +19,7 @@ class MainPage extends React.Component {
     };
     
     componentDidMount() {
-        this.props.toast("Welcome");
+        this.props.toast("Bine ai revenit!");
     
         this.props.history.replace('/' + kPageDashboard.id);
     }

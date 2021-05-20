@@ -1,6 +1,7 @@
 import {updateObject} from '../../support/min-support';
 import {
-    kActionApplicationSetNameAndVersion,
+    kActionApplicationAddKey, kActionApplicationDeleteKey,
+    kActionApplicationSetNameAndVersion, kActionApplicationSetNodeUid,
     kActionApplicationSnackAdd,
     kActionApplicationSnackRemove
 } from '../action/application-store-actions';
@@ -13,6 +14,7 @@ const initialState = {
     snack: [],
     snackMonitor: 0,
     
+    nodeUid: null,
     keys: [],
     
 };
@@ -24,11 +26,16 @@ const reducer = (state = initialState, action) => {
         return snackRemove(state);
     } else if(action.type === kActionApplicationSetNameAndVersion) {
         return setNameAndVersion(state, action.appName, action.appVersion);
+    } else if(action.type === kActionApplicationSetNodeUid) {
+        return setNodeUid(state, action.nodeUid);
+    } else if(action.type === kActionApplicationAddKey) {
+        return addKey(state, action.keyPath, action.groupUid);
+    } else if(action.type === kActionApplicationDeleteKey) {
+        return deleteKey(state, action.keyPath, action.groupUid);
     } else {
         return state;
     }
 };
-
 
 const snackAdd = (state, label, action) => {
     let snack = state.snack;
@@ -52,6 +59,20 @@ const setNameAndVersion = (state, appName, appVersion) => {
         appName: appName,
         appVersion: appVersion,
     });
+}
+
+const setNodeUid = (state, nodeUid) => {
+    return updateObject(state, {
+        nodeUid: nodeUid,
+    });
+}
+
+const addKey = (state, keyPath, groupUid) => {
+    return state;
+}
+
+const deleteKey = (state, keyPath, groupUid) => {
+    return state;
 }
 
 export default reducer;

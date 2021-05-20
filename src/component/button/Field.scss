@@ -1,0 +1,30 @@
+@import "src/App";
+
+.EasyField {
+  transition-duration: $durationTransitionNormal;
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny 0;
+  border-radius: $sizeBorderRadiusSmall;
+  width: fit-content;
+}
+
+.EasyFieldEditable {
+  transition-duration: $durationTransitionNormal;
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny $sizePaddingSmall;
+  background-color: $colorDark08;
+  outline: none;
+  border: none;
+  border-radius: $sizeBorderRadiusSmall;
+  width: fit-content;
+}
+
+.EasyFieldEditable::placeholder {
+  @extend .roboto-100;
+  font-size: $sizeFontRegular;
+  color: #999999;
+}

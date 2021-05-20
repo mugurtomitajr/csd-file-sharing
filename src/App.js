@@ -7,7 +7,8 @@ import Toast from './component/base/Toast';
 import MainPage from './base/MainPage'
 
 import { channels, isProduction } from './shared/constants';
-import {setNameAndVersion, snackAdd} from './store/action/application-store-actions';
+import {setNameAndVersion, setNodeUid, snackAdd} from './store/action/application-store-actions';
+import {getNodeUid} from './store/persistent/persistent';
 const { ipcRenderer } = window;
 
 class App extends React.Component {
@@ -29,7 +30,9 @@ class App extends React.Component {
     
     componentDidMount() {
         let waitTime = isProduction ? 1000 : 0;
-        setTimeout(() => {
+        setTimeout(async () => {
+            let nodeUid = await getNodeUid();
+            this.props.setNodeUid(nodeUid);
             this.setState({
                 loading: false,
             });
@@ -63,6 +66,7 @@ const mapStateToProps = (state) => {
     return {
         appName: state.application.appName,
         appVersion: state.application.appVersion,
+        nodeUid: state.application.nodeUid,
     };
 };
 
@@ -70,6 +74,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         toast: (label, action) => dispatch(snackAdd(label, action)),
         setAppNameAndVersion: (appName, appVersion) => dispatch(setNameAndVersion(appName, appVersion)),
+        setNodeUid: (nodeUid) => dispatch(setNodeUid(nodeUid)),
     };
 };
 

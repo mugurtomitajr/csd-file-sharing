@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { channels } = require('../src/shared/constants');
 const path = require('path');
 const url = require('url');
+const net = require('net');
 
 let mainWindow;
 
@@ -51,3 +52,5 @@ ipcMain.on(channels.APP_INFO, (event) => {
         appVersion: app.getVersion(),
     });
 });
+
+

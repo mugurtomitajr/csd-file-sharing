@@ -7,8 +7,11 @@ import {snackAdd} from '../store/action/application-store-actions';
 
 const Drawer = (props) => {
     const onItemPress = (item) => {
-        props.history.go(-props.history.index);
-        props.history.replace('/' + item.id);
+        console.log(props.history.path);
+        if(props.history.path != '/' + item.id) {
+            props.history.go(-props.history.index);
+            props.history.replace('/' + item.id);
+        }
     }
     
     let location = props.history.entries[0].pathname;

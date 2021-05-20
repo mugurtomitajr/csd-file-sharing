@@ -25,3 +25,18 @@
   }
 
 }
+
+.ConsoleTextarea {
+  transition-duration: $durationTransitionNormal;
+  @extend .roboto-100;
+  color: $colorLight03;
+  font-size: $sizeFontRegular;
+  padding: $sizePaddingTiny $sizePaddingSmall;
+  background-color: $colorDark08;
+  outline: none;
+  border: none;
+  resize: none;
+  border-radius: $sizeBorderRadiusSmall;
+  width: 400px;
+  height: 400px;
+}
